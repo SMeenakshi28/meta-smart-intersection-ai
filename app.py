@@ -150,6 +150,18 @@ def start_api():
     uvicorn.run(api, host="0.0.0.0", port=8000)
 
 # Start the API in a background thread so it doesn't block Streamlit
-if not hasattr(st, 'api_started'):
-    st.api_started = True
-    Thread(target=start_api, daemon=True).start()
+if __name__ == "__main__":
+    # 1. Start the API in a background thread
+    api_thread = Thread(target=start_api, daemon=True)
+    api_thread.start()
+    
+    # 2. Start the Streamlit frontend
+    import subprocess
+    import sys
+    
+    # We force Streamlit to run on the port Hugging Face expects (7860)
+    subprocess.run([
+        "streamlit", "run", "app.py", 
+        "--server.port=7860", 
+        "--server.address=0.0.0.0"
+    ])
