@@ -3,6 +3,7 @@ name: "smart-intersection-safety"
 version: "1.0.0"
 entry_point: "app.py"
 sdk: "docker"
+app_port: 8000
 framework: "PyTorch"
 task_ids: 
   - "easy-flow"
