@@ -19,6 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the port Streamlit uses on Hugging Face
 EXPOSE 7860
+EXPOSE 8000
 
 # Run the app on the specific port Hugging Face requires
-CMD ["streamlit", "run", "app.py", "--server.port=7860", "--server.address=0.0.0.0"]
+CMD ["python", "app.py"]
